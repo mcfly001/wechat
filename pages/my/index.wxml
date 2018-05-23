@@ -1,0 +1,38 @@
+<view class="main-wrapper">
+
+  <view class="header">
+    <view class="avatarurl">
+      <image mode="scaleToFill" src="{{avatarUrl}}"></image>
+    </view>
+    <view class="userinfo flex-col">
+      <view class="name">{{userName}}</view>
+      <view class="address">
+        <text>我的收货地址:  </text>
+        <text>浙江杭州西溪景苑</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="orderinfo flex-row">
+    <view wx:for="{{orderNavList}}"
+          wx:key="index"
+          wx:for-index="index"
+          class=""
+          wx:for-item="itemName">
+      {{itemName}}
+    </view>
+  </view>
+
+  <scroll-view class="activeinfo">
+
+    <view wx:for="{{personalInfo}}"
+          wx:key="index"
+          wx:for-index="index"
+          class="active-item"
+          wx:for-item="item">
+      {{item.title}}
+    </view>
+
+  </scroll-view>
+
+</view>

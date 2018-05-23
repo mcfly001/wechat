@@ -1,0 +1,16 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+} 
+
+.flex-row{
+  display: flex;
+  flex-flow: nowrap row;
+  justify-content: space-between;
+}
+
+.flex-col{
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: space-between;
+}

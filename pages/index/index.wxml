@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<view class="main-wrapper">
+
+  <view class="header">
+
+    <view class="flex-row">
+      <image class="logo" mode="scaleToFill" src="{{logo}}"></image>
+      <view class="shopinfo flex-col">
+        <view class="title">{{title}}</view>
+        <view class="address">地址: {{address}}</view>
+        <view class="tel">电话: {{tel}}</view>
+      </view>
+      <view class="bg-logo">
+        <image mode="scaleToFill" src="{{logo}}"></image>
+      </view>
+    </view>
+
+    <view class="info">
+      <view class="announcement">{{info}}</view>
+    </view>
+
+  </view>
+
+  <view class="content-wrapper flex-row">
+
+    <scroll-view scroll-y class="leftnav">
+      <view wx:for="{{leftnav}}"
+            wx:key="index"
+            wx:for-index="index"
+            class="leftnav-li flex-col"
+            wx:for-item="itemname">
+        {{itemname}}
+      </view>
+    </scroll-view>
+
+     <scroll-view scroll-y class="brief-list">
+      <view wx:for="{{brieflist}}" wx:key="index" wx:for-index="index" wx:for-item="itemname">
+        <view class="brief-name">{{itemname.foods[0].name}} </view>
+        <view class="brief-price">{{itemname.foods[0].price}}</view>
+        <view class="brief-description">{{itemname.foods[0].description}}</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

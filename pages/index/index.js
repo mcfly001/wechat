@@ -1,8 +1,11 @@
 const app = getApp()
 const util = require('../../utils/util.js')
+const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
+var qqmapsdk
 
 Page({
   data: {
+    currentDistance: '',
     logo: '../icon/logo.jpg',
     banner: '../icon/banner.png',
     src: 'http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg',
@@ -38,13 +41,6 @@ Page({
         ],
         name: "热销榜",
         type: -1
-      },
-      {
-        foods: [
-
-        ],
-        name: "单人精彩套餐",
-        type: 2
       },
       {
         foods: [
@@ -237,13 +233,47 @@ Page({
     })
   },
   onLoad: function () {
-    util.getUserInfo(app)
+    //util.getUserInfo(app)
+    this.getLocation()
+    qqmapsdk = new QQMapWX({
+      key: 'SCBBZ-BOJR4-WLMUQ-DOOJD-SFQI6-J7FQM'
+    })
   },
   getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
+    })
+  },
+  getLocationAreaName: function(latitude, longitude){
+    var self = this
+    qqmapsdk.reverseGeocoder({
+      location: {
+        latitude: latitude,
+        longitude: longitude
+      },
+      success: function (res) {
+        self.setData({
+          currentDistance: res.result.address_component.district
+        })
+      },
+      fail: function (res) {
+        self.setData({
+          currentDistance: '获取位置失败'
+        })
+      }
+    })
+  },
+  getLocation: function(){
+    var self = this
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        self.getLocationAreaName(latitude, longitude)
+      }
     })
   }
 })

@@ -1,6 +1,11 @@
 <!--index.wxml-->
 <view class="main-wrapper">
 
+  <view class="top flex-row">
+    <view class="distance">{{currentDistance}}</view>
+    <input placeholder="请输入您想要查询的商品" auto-focus/>
+  </view>
+
   <view class="header">
 
     <view class="flex-row">
@@ -34,10 +39,17 @@
     </scroll-view>
 
      <scroll-view scroll-y class="brief-list">
-      <view wx:for="{{brieflist}}" wx:key="index" wx:for-index="index" wx:for-item="itemname">
-        <view class="brief-name">{{itemname.foods[0].name}} </view>
-        <view class="brief-price">{{itemname.foods[0].price}}</view>
-        <view class="brief-description">{{itemname.foods[0].description}}</view>
+      <view wx:for="{{brieflist}}"
+            wx:key="index"
+            class="flex-row goods-detail"
+            wx:for-index="index"
+            wx:for-item="itemname">
+        <image class="goods-image" mode="scaleToFill" src="{{itemname.foods[0].image}}"></image>
+        <view class="text flex-col">
+          <view class="brief-name">{{itemname.foods[0].name}} </view>
+          <view class="brief-description">{{itemname.foods[0].description}}</view>
+          <view class="brief-price">￥{{itemname.foods[0].price}}元</view>
+        </view>
       </view>
     </scroll-view>
   </view>

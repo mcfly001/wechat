@@ -118,18 +118,18 @@
 }
 
 .content-wrapper{
-  height: 70vh;
+  height: 68vh;
   overflow: hidden;
 }
 
 .leftnav{
-  width: 23vw;
+  width: 20vw;
   background: #f3f5f7;
   font-size: 27rpx;
-  padding: 2vh 0 0 5vw;
+  padding: 2vh 0 0 3vw;
   overflow: auto;
   height: 100%;
-  flex-basis: 23vw;
+  flex-basis: 20vw;
 }
 
 .leftnav-li{
@@ -141,7 +141,7 @@
 
 .brief-list{
   flex: 1;
-  padding: 2vw 0 2vw 5vw;
+  padding: 2vw 0 2vw 2vw;
 }
 
 .goods-detail{

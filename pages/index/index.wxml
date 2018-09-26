@@ -33,8 +33,8 @@
             wx:key="index"
             wx:for-index="index"
             class="leftnav-li flex-col"
-            wx:for-item="itemname">
-        {{itemname}}
+            wx:for-item="item">
+        {{item.name}}
       </view>
     </scroll-view>
 
@@ -44,7 +44,10 @@
             class="flex-row goods-detail"
             wx:for-index="index"
             wx:for-item="itemname">
-        <image class="goods-image" mode="scaleToFill" src="{{itemname.foods[0].image}}"></image>
+        <image class="goods-image"
+               mode="scaleToFill"
+               src="{{itemname.foods[0].image}}">
+        </image>
         <view class="text flex-col">
           <view class="brief-name">{{itemname.foods[0].name}} </view>
           <view class="brief-description">{{itemname.foods[0].description}}</view>

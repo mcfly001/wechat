@@ -1,3 +1,8 @@
+/**
+ * 修正时间
+ * @param date
+ * @returns {string}
+ */
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1

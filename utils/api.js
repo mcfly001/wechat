@@ -2,13 +2,13 @@
  * 获取左侧分类列表
  * @param pageSize
  * @param pageNum
- * @param searchText
+ * @param name
  * @param callback
  * @returns {*}
  */
-const getMenuList = (pageSize, pageNum, searchText, callback) => {
+const getMenuList = (pageSize, pageNum, name, callback) => {
   return wx.request({
-    url: `http://wuliaoyuan.top/api-douchi/get.category.list?pageSize=${pageSize}&pageNum=${pageNum}&searchText=${searchText}`,
+    url: `http://wuliaoyuan.top/api-douchi/get.category.list?pageSize=${pageSize}&pageNum=${pageNum}&name=${name}`,
     success: function (res) {
       console.log(1133111, res)
       callback && callback(res)
@@ -20,20 +20,21 @@ const getMenuList = (pageSize, pageNum, searchText, callback) => {
  * 获取商品列表
  * @param pageSize
  * @param pageNum
- * @param searchText
+ * @param filter
  * @param callback
  * @returns {*}
  */
-const getGoodsList = (pageSize, pageNum, searchText, callback) => {
-  console.log(pageSize, pageNum, searchText)
+const getGoodsList = (pageSize, pageNum, filter, callback) => {
   return wx.request({
-    url: `http://wuliaoyuan.top/api-douchi/get.goods.list?pageSize=${pageSize}&pageNum=${pageNum}&name=${searchText}`,
+    url: `http://wuliaoyuan.top/api-douchi/get.goods.list?pageSize=${pageSize}&pageNum=${pageNum}&filter=${JSON.stringify(filter)}`,
     success: function (res) {
       console.log(111111, res)
       callback && callback(res)
     }
   })
 }
+
+
 
 module.exports = {
   getGoodsList: getGoodsList,

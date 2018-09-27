@@ -15,8 +15,9 @@ Page({
     tel: '15869027281',
     info: '3公里以内免费送货上门',
     topnav: ['商品', '评价', '图集'],
-    leftnav: [],
-    brieflist: []
+    leftnav: [{'name': '全部', _id: '0'}],
+    brieflist: [],
+    currentCategoryId: '0' // 当前被选中的分类
   },
   //事件处理函数
   bindViewTap: function() {
@@ -26,16 +27,9 @@ Page({
   },
   onLoad: function () {
     // 获取左侧栏内容
-    api.getMenuList(1, 99, '',  res => {
-        this.setData({
-          leftnav: res.data.data.data
-        })
-    })
-    api.getGoodsList(1, 99, '',  res => {
-      this.setData({
-        brieflist: res.data.data
-      })
-    })
+    this.getCategoryList()
+    // 默认是所有商品都呈现
+    this.getGoodsList('', '0')
     this.getLocation()
     qqmapsdk = new QQMapWX({
       key: 'SCBBZ-BOJR4-WLMUQ-DOOJD-SFQI6-J7FQM'
@@ -77,5 +71,36 @@ Page({
         self.getLocationAreaName(latitude, longitude)
       }
     })
+  },
+  getCategoryList(){
+    api.getMenuList(1, 99, '',  res => {
+      this.setData({
+        leftnav: [{'name': '全部', _id: '0'}].concat(res.data.data.data)
+      })
+    })
+  },
+  getGoodsList(name, categoryId){
+    let filter = {}
+    if(name){
+      filter.name = name
+    }
+    if(categoryId && categoryId !== '0'){
+      filter.categoryId = categoryId
+    }
+    api.getGoodsList(1, 99, filter,  res => {
+      this.setData({
+        brieflist: res.data.data.data
+      })
+    })
+  },
+  filterGoodsListByName(e){
+    this.getGoodsList(e.detail.value)
+  },
+  filterGoodsByCategory(e){
+    let catrgoryId = e.currentTarget.dataset.categoryid
+    this.setData({
+      currentCategoryId: catrgoryId
+    })
+    this.getGoodsList('', catrgoryId)
   }
 })
